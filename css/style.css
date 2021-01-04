@@ -3,9 +3,12 @@ body {
 }
 
 .grid {
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
   display: grid;
-  grid-template-columns: 300px 300px 300px;
-  grid-template-rows: 300px 300px 300px;
+  grid-template-columns: 250px 250px 250px;
+  grid-template-rows: 250px 250px 250px;
   grid-gap: 20px;
 }
 
@@ -14,4 +17,13 @@ body {
   height: 100%;
   background: white;
   padding: .5em;
+  cursor: pointer;
+}
+
+.grid div:hover {
+  background-color: grey;
+}
+
+h1, h2 {
+  text-align: center;
 }
