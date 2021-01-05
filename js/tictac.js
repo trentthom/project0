@@ -33,17 +33,20 @@ $(document).ready(function(){
   $('.cell').click(function(){ //adds event listener to all 9 cells
     totalTurns += 1;
     const cell = $(this).attr('id')//guillaume added this const
-    //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
-    if (player1Counter === player2Counter) {
-      $(`#${cell}`).text(player1Choice);
-      player1Counter += 1;
-    } else if (player1Counter !== player2Counter) {
-      $(`#${cell}`).text(player2Choice);
-      player2Counter += 1;
+    if ($(`#${cell}`).text()=== "") { //if cell is empty
+
+    //getter
+      if (player1Counter === player2Counter) { //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
+        $(`#${cell}`).text(player1Choice);//setting the text
+        player1Counter += 1;
+      } else if (player1Counter !== player2Counter) {
+        $(`#${cell}`).text(player2Choice);
+        player2Counter += 1;
+      }
     }
     if (totalTurns === 9) {
       $("h2").after(`GAMEOVER`);
-    }
+    };
       console.log(`player1 count:`,player1Counter)
       console.log(`totalcount:`, totalTurns)
       console.log(`player2 count:`,player2Counter)
