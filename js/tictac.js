@@ -46,8 +46,12 @@ $(document).ready(function(){
         player2Counter += 1;
         totalTurns += 1;//put total turns in here - more logical
       }
-      if($('#a1').text()=== player1Choice {
-        $('#winner').show()
+      if($('#a1').text()=== player1Choice && $('#a2').text()=== player1Choice && $('#a3').text()=== player1Choice || $('#a1').text()=== player2Choice && $('#a2').text()=== player2Choice && $('#a3').text()=== player2Choice) {
+        $('#winner').show();
+      } else if ($('#b1').text()=== player1Choice && $('#b2').text()=== player1Choice && $('#b3').text()=== player1Choice || $('#b1').text()=== player2Choice && $('#b2').text()=== player2Choice && $('#b3').text()=== player2Choice) {
+        $('#winner').show();
+      } else if ($('c1').text()=== player1Choice && $('#c2').text()=== player1Choice && $('c3').text()=== player1Choice || $('c1').text()=== player2Choice && $('#c2').text()=== player2Choice && $('c3').text()=== player2Choice) {
+        $('#winner').show();
       }
     }
     if (totalTurns === 9) {
