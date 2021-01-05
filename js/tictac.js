@@ -11,6 +11,7 @@ let player2Counter = 0;
 
 
 $(document).ready(function(){
+  $('#winner').hide()
   $('#a1').on('click', function(){
      //gotta be in camelCase
   });
@@ -31,17 +32,22 @@ $(document).ready(function(){
   });
    //make an X appear and add 1 to the counter
   $('.cell').click(function(){ //adds event listener to all 9 cells
-    totalTurns += 1;
     const cell = $(this).attr('id')//guillaume added this const
-    if ($(`#${cell}`).text()=== "") { //if cell is empty
+    if ($(`#${cell}`).text()=== "") { //if cell is empty(true) continue with code, if false do nothing)
+      //($(`#${cell}`) is grabbing the div and through the const cell variable is grabbing the id of the cell!
 
     //getter
-      if (player1Counter === player2Counter) { //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
+      if(player1Counter === player2Counter) { //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
         $(`#${cell}`).text(player1Choice);//setting the text
         player1Counter += 1;
+        totalTurns += 1;
       } else if (player1Counter !== player2Counter) {
         $(`#${cell}`).text(player2Choice);
         player2Counter += 1;
+        totalTurns += 1;//put total turns in here - more logical
+      }
+      if($('#a1').text()=== player1Choice {
+        $('#winner').show()
       }
     }
     if (totalTurns === 9) {
