@@ -1,8 +1,9 @@
 console.log('hi')
 
 
-let playerChoice = "";
-
+let player1Choice = "";
+let player2Choice = "";
+let totalTurns = 0;
 
 
 
@@ -10,35 +11,35 @@ $(document).ready(function(){
   $('#a1').on('click', function(){
      //gotta be in camelCase
   });
-  $('#naughts').click(function(){ //call backs/listeners
-    if(playerChoice === "") {
-      $("h2").after("You have chosen 0")//try and make this a h2 tag later on
-      playerChoice = "0";
+  $('#naughts').click(function(){ //click on naughts button for player selection
+    if(player1Choice === "") {
+      player1Choice = "0";
+      player2Choice = "X";
+      $("h2").after(`Player 1 is 0 and Player 2 is ${player2Choice}` )//try and make this a h2 tag later on
     }
-
-  })
-  $('#crosses').click(function(){
-    $("h2").after("You have chosen X")
-    playerChoice = "X"
   })
 
-  // $("#a2").mouseenter(function(){
-  //   $("#a2").css({backgroundColor:"blue"});
-  // })
-  // const a3Tilechange = $("#a3").mouseenter(function(){
-  //   $("#a3").css({backgroundColor:"blue"});
-  // })
-  // $("#b1").mouseenter(function(){
-  //   $("#b1").css({backgroundColor:"blue"});
-  // })
-
-
-
+  $('#crosses').click(function(){ //click on crosses for player selection
+    if(player1Choice === "") {
+      player1Choice = "X";
+      player2Choice = "0";
+      $("h2").after(`Player 1 is X and Player 2 is ${player2Choice}` )
+    }
+  });
+   //make an X appear and add 1 to the counter
+  $('.cell').click(function(){ //adds event listener to all 9 cells
+    totalTurns += 1;
+    const cell = $(this).attr('id')
+    $(`#${cell}`).text(player1Choice); //if statement to tell between player1 and player2
+  });
+//reset board game
+  $('#reset').click(function(){
+    location.reload();
+  })
 });
+//find a way to change the turn between X and 0.
+//
 
-$("#a1").click(function(){
-  $("h1").hide();
-});
 
 
 

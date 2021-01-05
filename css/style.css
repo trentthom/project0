@@ -12,12 +12,14 @@ body {
   grid-gap: 20px;
 }
 
-.grid div {
+.cell {
   width: 100%;
   height: 100%;
   background: white;
   padding: .5em;
   cursor: pointer;
+  text-align: center;
+  line-height: 15;
 }
 
 .grid div:hover {
@@ -26,4 +28,8 @@ body {
 
 h1, h2 {
   text-align: center;
+}
+
+span {
+  margin-left: 70px;
 }
