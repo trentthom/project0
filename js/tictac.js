@@ -1,5 +1,56 @@
-console.log('hi')
 
+
+const makeMove = function(cellId, boardStatus, currentSymbol) {
+  console.log(`cellid:`,cellId)
+  if(cellId === "a1") {
+    if(boardStatus[0][0] !== null) {
+      return false;
+    }
+    boardStatus[0][0] = currentSymbol;//modify board
+  } else if(cellId === "a2") {
+    if(boardStatus[0][1] !== null) {
+      return false;
+    }
+    boardStatus[0][1] = currentSymbol;//modify board
+  } else if(cellId === "a3") {
+    if(boardStatus[0][2] !== null) {
+      return false;
+    }
+    boardStatus[0][2] = currentSymbol;//modify board
+  } else if(cellId === "b1") {
+    console.log(`hello`, boardStatus[1][0])
+    if(boardStatus[1][0] !== null) {
+      return false;
+    }
+    boardStatus[1][0] = currentSymbol;//modify board
+  } else if(cellId === "b2") {
+    if(boardStatus[1][1] !== null) {
+      return false;
+    }
+    boardStatus[1][1] = currentSymbol;//modify board
+  } else if(cellId === "b3") {
+    if(boardStatus[1][2] !== null) {
+      return false;
+    }
+    boardStatus[1][2] = currentSymbol;//modify board
+  } else if(cellId === "c1") {
+    if(boardStatus[2][0] !== null) {
+      return false;
+    }
+    boardStatus[2][0] = currentSymbol;//modify board
+  } else if(cellId === "c2") {
+    if(boardStatus[2][1] !== null) {
+      return false;
+    }
+    boardStatus[2][1] = currentSymbol;//modify board
+  } else if(cellId === "c3") {
+    if(boardStatus[2][2] !== null) {
+      return false;
+    }
+    boardStatus[2][2] = currentSymbol;//modify board
+  }
+  return true //made move is true it DID make a move.
+};
 
 let player1Choice = "";
 let player2Choice = "";
@@ -8,10 +59,16 @@ let totalTurns = 0;
 let player1Counter = 0;
 let player2Counter = 0;
 
+let boardStatus = [
+  [null,null,null],
+  [null,null,null],
+  [null,null,null],
+];
+
 
 
 $(document).ready(function(){
-  $('#winner').hide()
+  $('#winnerbar').hide()
   $('#a1').on('click', function(){
      //gotta be in camelCase
   });
@@ -32,34 +89,39 @@ $(document).ready(function(){
   });
    //make an X appear and add 1 to the counter
   $('.cell').click(function(){ //adds event listener to all 9 cells
-    const cell = $(this).attr('id')//guillaume added this const
-    if ($(`#${cell}`).text()=== "") { //if cell is empty(true) continue with code, if false do nothing)
-      //($(`#${cell}`) is grabbing the div and through the const cell variable is grabbing the id of the cell!
-
-    //getter
-      if(player1Counter === player2Counter) { //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
-        $(`#${cell}`).text(player1Choice);//setting the text
-        player1Counter += 1;
-        totalTurns += 1;
-      } else if (player1Counter !== player2Counter) {
-        $(`#${cell}`).text(player2Choice);
-        player2Counter += 1;
-        totalTurns += 1;//put total turns in here - more logical
-      }
-      if($('#a1').text()=== player1Choice && $('#a2').text()=== player1Choice && $('#a3').text()=== player1Choice || $('#a1').text()=== player2Choice && $('#a2').text()=== player2Choice && $('#a3').text()=== player2Choice) {
-        $('#winner').show();
-      } else if ($('#b1').text()=== player1Choice && $('#b2').text()=== player1Choice && $('#b3').text()=== player1Choice || $('#b1').text()=== player2Choice && $('#b2').text()=== player2Choice && $('#b3').text()=== player2Choice) {
-        $('#winner').show();
-      } else if ($('c1').text()=== player1Choice && $('#c2').text()=== player1Choice && $('c3').text()=== player1Choice || $('c1').text()=== player2Choice && $('#c2').text()=== player2Choice && $('c3').text()=== player2Choice) {
-        $('#winner').show();
-      }
+    const cellId = $(this).attr('id')//guillaume added this const
+    let currentSymbol;
+    if(player1Counter === player2Counter) { //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
+      currentSymbol = player1Choice
+    } else {
+      currentSymbol = player2Choice;
     }
+    const madeMove = makeMove(cellId, boardStatus, currentSymbol);
+    if(madeMove === false) {
+      return
+    }
+    $(`#${cellId}`).text(currentSymbol);
+    if(player1Counter === player2Counter) { //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
+      player1Counter += 1;
+      totalTurns += 1;
+    } else if (player1Counter !== player2Counter) {
+      player2Counter += 1;
+      totalTurns += 1;//put total turns in here - more logical
+    }
+    // if($('#a1').text()=== player1Choice && $('#a2').text()=== player1Choice && $('#a3').text()=== player1Choice || $('#a1').text()=== player2Choice && $('#a2').text()=== player2Choice && $('#a3').text()=== player2Choice) {
+    //   $('#winnerbar').show();
+    // } else if ($('#b1').text()=== player1Choice && $('#b2').text()=== player1Choice && $('#b3').text()=== player1Choice || $('#b1').text()=== player2Choice && $('#b2').text()=== player2Choice && $('#b3').text()=== player2Choice) {
+    //   $('#winnerbar').show();
+    // } else if ($('c1').text()=== player1Choice && $('#c2').text()=== player1Choice && $('c3').text()=== player1Choice || $('c1').text()=== player2Choice && $('#c2').text()=== player2Choice && $('c3').text()=== player2Choice) {
+    //   $('#winnerbar').show();
+    // }
+
     if (totalTurns === 9) {
       $("h2").after(`GAMEOVER`);
     };
-      console.log(`player1 count:`,player1Counter)
-      console.log(`totalcount:`, totalTurns)
-      console.log(`player2 count:`,player2Counter)
+      // console.log(`player1 count:`,player1Counter)
+      // console.log(`totalcount:`, totalTurns)
+      // console.log(`player2 count:`,player2Counter)
 
     //if statement to tell between player1 and player2
   });
