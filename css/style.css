@@ -4,8 +4,7 @@ body {
 
 .grid {
   width: 80%;
-  margin-right: auto;
-  margin-left: auto;
+  margin-left: 540px;
   display: grid;
   grid-template-columns: 250px 250px 250px;
   grid-template-rows: 250px 250px 250px;
@@ -33,4 +32,7 @@ h1, h2 {
 
 span {
   margin-left: 70px;
+}
+#winnerbar {
+  text-align: center;
 }
