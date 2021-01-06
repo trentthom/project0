@@ -7,6 +7,7 @@ let totalTurns = 0;
 
 let player1Counter = 0;
 let player2Counter = 0;
+let drawDecider = false;
 
 
 
@@ -32,7 +33,7 @@ $(document).ready(function(){
   });
    //make an X appear and add 1 to the counter
   $('.cell').click(function(){
-    if(player1Choice === "") {
+    if(player1Choice === "" || drawDecider ) {
       return
     } //adds event listener to all 9 cells
     const cell = $(this).attr('id')//guillaume added this const
@@ -57,15 +58,19 @@ $(document).ready(function(){
       const c3 = $('#c3').text()
       if(a1 === a2 && a1 === a3 && a1 !== ""|| b1 === b2 && b1 === b3 && b1 !== "" || c1 === c2 && c1 === c3 && c1 !== "" || a1 === b1 && a1  === c1 && a1 !== ""|| a2 === b2 && a2  === c2 && a2 !== "" || a3 === b3 && a3  === c3 && a3 !== ""|| a1 === b2 && a1  === c3 && a1 !== ""|| a3 === b2 && a3  === c1 && a3 !== "" ) {
         if(player1Counter !== player2Counter) {
-          $('#choice').text(`Player 1 '${player1Choice}' WINS`);
+          drawDecider = true;
+          $('#choice').text(`Player 1 '${player1Choice}' WINS`)
+          return;
         } else {
-          $('#choice').text(`Player 2 '${player2Choice}' WINS`);
+          drawDecider = true;
+          $('#choice').text(`Player 2 '${player2Choice}' WINS`)
+          return
         }
+      }
+      if (totalTurns === 9 && drawDecider !== true) {
+        $("h1").text(`TIE GAME`);
+      };
 
-    }
-    if (totalTurns === 9) {
-      $("h1").text(`GAMEOVER`);
-    };
       console.log(`player1 count:`,player1Counter)
       console.log(`totalcount:`, totalTurns)
       console.log(`player2 count:`,player2Counter)
