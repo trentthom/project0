@@ -11,7 +11,7 @@ let player2Counter = 0;
 
 
 $(document).ready(function(){
-  $('#winner').hide()
+  $('#winnerbar').hide()
   $('#a1').on('click', function(){
      //gotta be in camelCase
   });
@@ -19,7 +19,7 @@ $(document).ready(function(){
     if(player1Choice === "") {
       player1Choice = "0";
       player2Choice = "X";
-      $("h2").after(`Player 1 is 0 and Player 2 is ${player2Choice}` )//try and make this a h2 tag later on
+      $("#choice").text(`Player 1 is 0 and Player 2 is ${player2Choice}` )//try and make this a h2 tag later on
     }
   })
 
@@ -27,16 +27,16 @@ $(document).ready(function(){
     if(player1Choice === "") {
       player1Choice = "X";
       player2Choice = "0";
-      $("h2").after(`Player 1 is X and Player 2 is ${player2Choice}` )
+      $("#choice").text(`Player 1 is X and Player 2 is ${player2Choice}` )
     }
   });
    //make an X appear and add 1 to the counter
-  $('.cell').click(function(){ //adds event listener to all 9 cells
+  $('.cell').click(function(){
+    if(player1Choice === "") {
+      return
+    } //adds event listener to all 9 cells
     const cell = $(this).attr('id')//guillaume added this const
-    if ($(`#${cell}`).text()=== "") { //if cell is empty(true) continue with code, if false do nothing)
-      //($(`#${cell}`) is grabbing the div and through the const cell variable is grabbing the id of the cell!
-
-    //getter
+    if ($(`#${cell}`).text()=== "") { //only runs if tru AT
       if(player1Counter === player2Counter) { //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
         $(`#${cell}`).text(player1Choice);//setting the text
         player1Counter += 1;
@@ -46,22 +46,31 @@ $(document).ready(function(){
         player2Counter += 1;
         totalTurns += 1;//put total turns in here - more logical
       }
-      if($('#a1').text()=== player1Choice && $('#a2').text()=== player1Choice && $('#a3').text()=== player1Choice || $('#a1').text()=== player2Choice && $('#a2').text()=== player2Choice && $('#a3').text()=== player2Choice) {
-        $('#winner').show();
-      } else if ($('#b1').text()=== player1Choice && $('#b2').text()=== player1Choice && $('#b3').text()=== player1Choice || $('#b1').text()=== player2Choice && $('#b2').text()=== player2Choice && $('#b3').text()=== player2Choice) {
-        $('#winner').show();
-      } else if ($('c1').text()=== player1Choice && $('#c2').text()=== player1Choice && $('c3').text()=== player1Choice || $('c1').text()=== player2Choice && $('#c2').text()=== player2Choice && $('c3').text()=== player2Choice) {
-        $('#winner').show();
-      }
+      const a1 = $('#a1').text()
+      const a2 = $('#a2').text()
+      const a3 = $('#a3').text()
+      const b1 = $('#b1').text()
+      const b2 = $('#b2').text()
+      const b3 = $('#b3').text()
+      const c1 = $('#c1').text()
+      const c2 = $('#c2').text()
+      const c3 = $('#c3').text()
+      if(a1 === a2 && a1 === a3 && a1 !== ""|| b1 === b2 && b1 === b3 && b1 !== "" || c1 === c2 && c1 === c3 && c1 !== "" || a1 === b1 && a1  === c1 && a1 !== ""|| a2 === b2 && a2  === c2 && a2 !== "" || a3 === b3 && a3  === c3 && a3 !== ""|| a1 === b2 && a1  === c3 && a1 !== ""|| a3 === b2 && a3  === c1 && a3 !== "" ) {
+        if(player1Counter !== player2Counter) {
+          $('#choice').text(`Player 1 '${player1Choice}' WINS`);
+        } else {
+          $('#choice').text(`Player 2 '${player2Choice}' WINS`);
+        }
+
     }
     if (totalTurns === 9) {
-      $("h2").after(`GAMEOVER`);
+      $("h1").text(`GAMEOVER`);
     };
       console.log(`player1 count:`,player1Counter)
       console.log(`totalcount:`, totalTurns)
       console.log(`player2 count:`,player2Counter)
 
-    //if statement to tell between player1 and player2
+  }  //if statement to tell between player1 and player2
   });
 //reset board game
   $('#reset').click(function(){
