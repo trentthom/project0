@@ -1,13 +1,21 @@
 console.log('hi')
 
 
-let player1Choice = "";
-let player2Choice = "";
+let player1Choice = "";//choose X or 0
+let player2Choice = "";//auto chosen after player 1 chooses
 let totalTurns = 0;
 
 let player1Counter = 0;
 let player2Counter = 0;
 let drawDecider = false;
+let win = false;
+
+let player1Wins = 0;
+let player2Wins = 0;
+
+
+
+
 
 
 
@@ -20,7 +28,7 @@ $(document).ready(function(){
     if(player1Choice === "") {
       player1Choice = "0";
       player2Choice = "X";
-      $("#choice").text(`Player 1 is 0 and Player 2 is ${player2Choice}` )//try and make this a h2 tag later on
+      $("#choice").text(`Player 1 is  ${player1Choice}  and Player 2 is  ${player2Choice}` )//try and make this a h2 tag later on
     }
   })
 
@@ -28,16 +36,16 @@ $(document).ready(function(){
     if(player1Choice === "") {
       player1Choice = "X";
       player2Choice = "0";
-      $("#choice").text(`Player 1 is X and Player 2 is ${player2Choice}` )
+      $("#choice").text(`Player 1 is  ${player1Choice}  and Player 2 is  ${player2Choice}` )
     }
   });
    //make an X appear and add 1 to the counter
   $('.cell').click(function(){
-    if(player1Choice === "" || drawDecider ) {
+    if(player1Choice === "") { //playerchoice must be chosen otherwise no click will happen
       return
     } //adds event listener to all 9 cells
     const cell = $(this).attr('id')//guillaume added this const
-    if ($(`#${cell}`).text()=== "") { //only runs if tru AT
+    if ($(`#${cell}`).text()=== "" && win === false) { //only runs if tru AT
       if(player1Counter === player2Counter) { //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
         $(`#${cell}`).text(player1Choice);//setting the text
         player1Counter += 1;
@@ -58,67 +66,38 @@ $(document).ready(function(){
       const c3 = $('#c3').text()
       if(a1 === a2 && a1 === a3 && a1 !== ""|| b1 === b2 && b1 === b3 && b1 !== "" || c1 === c2 && c1 === c3 && c1 !== "" || a1 === b1 && a1  === c1 && a1 !== ""|| a2 === b2 && a2  === c2 && a2 !== "" || a3 === b3 && a3  === c3 && a3 !== ""|| a1 === b2 && a1  === c3 && a1 !== ""|| a3 === b2 && a3  === c1 && a3 !== "" ) {
         if(player1Counter !== player2Counter) {
-          drawDecider = true;
+          win = true;
+          player1Wins += 1;
+          $('#player1score').text(player1Wins)
+          console.log('player1wins:',player1Wins)
           $('#choice').text(`Player 1 '${player1Choice}' WINS`)
           return;
         } else {
-          drawDecider = true;
+          win = true;
+          player2Wins += 1;
+          $('#player2score').text(player2Wins)
+          console.log('player2wins:',player2Wins)
           $('#choice').text(`Player 2 '${player2Choice}' WINS`)
-          return
+          return;
         }
       }
-      if (totalTurns === 9 && drawDecider !== true) {
-        $("h1").text(`TIE GAME`);
-      };
 
-      console.log(`player1 count:`,player1Counter)
-      console.log(`totalcount:`, totalTurns)
-      console.log(`player2 count:`,player2Counter)
-
-  }  //if statement to tell between player1 and player2
+  }
   });
-//reset board game
+console.log(`totalturns:`,totalTurns)
+  if (totalTurns === 9) {
+    $("h1").text(`TIE GAME`);
+  };
+
+
   $('#reset').click(function(){
-    location.reload();
+    player1Counter = 0;
+    player2Counter = 0;
+    player1Choice = ""
+    player2Choice = ""
+    $('#choice').text("")
+    $('.cell').text("")
+    win = false;
+
   })
 });
-
-
-//find a way to change the turn between X and 0.
-//
-
-
-
-
-
-
-// $("#regTitle").html("Hello World");
-
-
-// var div = $("<div></div>");//create tag
-// $("#box").append(div);//using .after i could insert this after the current h2
-
-
-// ### Big Goals
-//
-// * **Build a web application from scratch**, without a starter codebase
-// * Use your programming skills to **map out the game logic for a simple game like Tic Tac Toe**
-// * **Separate HTML, CSS, and JavaScript files** in your application
-// * Build an application **to a spec that someone else gives you**
-// * **Build a dynamic game that allows two players to compete**
-// * **Craft a ``readme.md`` file that explains your app** to the world
-//
-// ---
-//
-// ### Technical Requirements
-//
-// Your app must:
-//
-// * **Render a game board in the browser**
-// * **Switch turns** between X and O (or whichever markers you select)
-// * **Visually display which side won** if a player gets three in a row or show a draw/"cat’s game" if neither wins
-// * **Include separate HTML / CSS / JavaScript files**
-// * Stick with **KISS (Keep It Simple Stupid)** and **DRY (Don't Repeat Yourself)** principles
-// * Use **Javascript** for **DOM manipulation**
-// * **Deploy your game online**, where the rest of the world can access it
-// * Use **semantic markup** for HTML and CSS (adhere to best practices)

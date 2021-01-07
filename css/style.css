@@ -64,3 +64,25 @@ span {
   font-size: 15px;
   box-shadow: 5px 10px:
 }
+
+#scoreboard {
+  width: 250px;
+  height: 450px;
+  
+}
+
+#board {
+  width:800px;
+
+}
+
+#container {
+  display: grid;
+  grid-template-columns: auto 800px auto;
+  margin: 0 auto;
+}
+
+#controls {
+  width:250px;
+
+}

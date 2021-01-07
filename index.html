@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,18 +14,28 @@
   <h1>TIC TAC TOE</h1>
   <h2>Player 1 choose <button class="buttons" id="naughts">Naughts</button> or <button class="buttons" id="crosses">crosses</button><span><button class="buttons" id="reset">Reset</button></span></h2>
   <h2 id="choice"></h2>
+  <!-- <h2 id="score"></h2> -->
   <!-- <h2 id="winner">You've won the game</h2> -->
   <!-- <div id="winnerbar">You've won the game</div> -->
-  <div class="grid">
-    <div id="a1" class="cell"></div>
-    <div id="a2" class="cell"></div>
-    <div id="a3" class="cell"></div>
-    <div id="b1" class="cell"></div>
-    <div id="b2" class="cell"></div>
-    <div id="b3" class="cell"></div>
-    <div id="c1" class="cell"></div>
-    <div id="c2" class="cell"></div>
-    <div id="c3" class="cell"></div>
+  <div id="container">
+    <div id="controls"></div>
+    <div id="board">
+      <div class="grid">
+        <div id="a1" class="cell"></div>
+        <div id="a2" class="cell"></div>
+        <div id="a3" class="cell"></div>
+        <div id="b1" class="cell"></div>
+        <div id="b2" class="cell"></div>
+        <div id="b3" class="cell"></div>
+        <div id="c1" class="cell"></div>
+        <div id="c2" class="cell"></div>
+        <div id="c3" class="cell"></div>
+      </div>
+    </div>
+    <div id="scoreboard">
+      <div>Player 1 Score <span id="player1score"></span></div>
+      <div>Player 2 Score <span id="player2score"></span></div>
+    </div>
   </div>
   <!-- <button class="game--restart">Restart Game</button> -->
 </body>
