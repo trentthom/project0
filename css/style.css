@@ -30,6 +30,7 @@ body {
 h1, h2 {
   text-align: center;
   font-family: 'Roboto', sans-serif;
+  text-shadow:  2px 2px grey;
 }
 
 span {
@@ -68,7 +69,7 @@ span {
 #scoreboard {
   width: 250px;
   height: 450px;
-  
+
 }
 
 #board {

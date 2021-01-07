@@ -1,4 +1,4 @@
-console.log('hi')
+console.log('hh')
 
 
 let player1Choice = "";//choose X or 0
@@ -12,12 +12,6 @@ let win = false;
 
 let player1Wins = 0;
 let player2Wins = 0;
-
-
-
-
-
-
 
 $(document).ready(function(){
   $('#winnerbar').hide()
@@ -40,20 +34,20 @@ $(document).ready(function(){
     }
   });
    //make an X appear and add 1 to the counter
-  $('.cell').click(function(){
+  $('.cell').click(function(){//adds event listener to all 9 cells
     if(player1Choice === "") { //playerchoice must be chosen otherwise no click will happen
       return
-    } //adds event listener to all 9 cells
-    const cell = $(this).attr('id')//guillaume added this const
-    if ($(`#${cell}`).text()=== "" && win === false) { //only runs if tru AT
-      if(player1Counter === player2Counter) { //$(`#${cell}`).text(player1Choice); //this line is like grabbing the individual cell that is clicked
-        $(`#${cell}`).text(player1Choice);//setting the text
+    }
+    const cell = $(this).attr('id')
+    if ($(`#${cell}`).text()=== "" && win === false) {
+      if(player1Counter === player2Counter) {
+        $(`#${cell}`).text(player1Choice);
         player1Counter += 1;
         totalTurns += 1;
       } else if (player1Counter !== player2Counter) {
         $(`#${cell}`).text(player2Choice);
         player2Counter += 1;
-        totalTurns += 1;//put total turns in here - more logical
+        totalTurns += 1;
       }
       const a1 = $('#a1').text()
       const a2 = $('#a2').text()
@@ -69,27 +63,23 @@ $(document).ready(function(){
           win = true;
           player1Wins += 1;
           $('#player1score').text(player1Wins)
-          console.log('player1wins:',player1Wins)
           $('#choice').text(`Player 1 '${player1Choice}' WINS`)
+          $('#gameover').text(`GAMEOVER`).css("color","red")
           return;
         } else {
           win = true;
           player2Wins += 1;
           $('#player2score').text(player2Wins)
-          console.log('player2wins:',player2Wins)
           $('#choice').text(`Player 2 '${player2Choice}' WINS`)
+          $('#gameover').text(`GAMEOVER`).css("color","red")
           return;
         }
       }
-
+      if (totalTurns === 9 && win === false) {
+        $("h1").text(`TIE GAME`).css("color","red");
+      };
   }
   });
-console.log(`totalturns:`,totalTurns)
-  if (totalTurns === 9) {
-    $("h1").text(`TIE GAME`);
-  };
-
-
   $('#reset').click(function(){
     player1Counter = 0;
     player2Counter = 0;
@@ -98,6 +88,9 @@ console.log(`totalturns:`,totalTurns)
     $('#choice').text("")
     $('.cell').text("")
     win = false;
+    $('#gameover').text()
+    $("h1").text("TIC TAC TOE").css("color","black");
+    totalTurns = 0
 
   })
 });
